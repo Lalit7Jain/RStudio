@@ -1,0 +1,1160 @@
+---
+title: "TextAnalytics"
+author: "Lalit Jain"
+output: html_document
+---
+
+## Core objectives
+
+1. Simplicity
+2. Power
+3. Best practice
+    * workflow
+    * transparency and reproducability
+3. Performance
+4. Inter-operability with other tools
+
+## Basic Principles
+
+1. Corpus texts are text repositories.
+    * Should not have their texts modified as part of preparation or analysis
+    * Subsetting or redefining documents is allowable
+    
+2. A corpus should be capable of holding additional objects that will be associated with the corpus, such as dictionaries, stopword, and phrase lists, that will propagate downstream. 
+    
+3. Downstream objects should record the settings used to produce them.
+    * includes: tokenized texts (`tokenizedTexts`), document-feature matrixes (`dfm`)
+    * settings examples are: `tolower`, `stem`, `removeTwitter` etc.
+    * also include any objects used in feature selection, such as dictionaries or stopword lists
+
+
+4. A document-feature matrix is a sparse matrix that is always *documents* (or document groups) in rows by *features* in columns.
+
+5. Encoding of texts should be done in the corpus, and recorded as meta-data in the corpus
+    * This encoding should be `UTF-8` by default (problem for Windows machines)
+    * Basic text operations will use the `stringi` package, based on the ICU libraries for Unicode compliance
+
+
+## Text analysis workflow: Corpora, documents, and features
+
+1.  Creating the corpus
+
+    * reading files, probably using `textfile()`
+    * creating a corpus using `corpus()`
+    * converting encodings
+    * adding document variables (`docvars`) and metadata (`metadoc` and `metacorpus`).
+
+2.  Defining and delimiting documents
+
+    * defining what are "texts", for instance using `changeunits` or grouping
+
+## Text analysis workflow: Corpora, documents, and features (cont.)
+
+3.  Defining and delimiting textual features, using:
+    
+    * `tokenize`, to indentify instances of defined features ("tokens") and extract 
+       them as vectors
+    *  usually these will consist of terms, but may also consist of:
+        *   `ngrams` and `skipgrams`, sequences of adjacent or nearby tokens
+        *   multi-word expressions, through `phrasetotoken`
+    *  in this step we also apply rules that will keep or ignore elements, such as 
+        * punctuation
+        * digitsm, including or currency-prefixed digits
+        * URLs
+        * Twitter tags
+        * inter-token separators
+
+## Text analysis workflow: Corpora, documents, and features (cont.)
+
+4.  Further feature selection
+
+    Once defined and extracted from the texts (the tokenization step), features may be:
+    *   *removed* or *kept* through use of predefined lists or patterns, using `selectFeatures`
+    *   *collapsed* by:
+        *   stemming, through the `stem` option in `dfm` or `wordstem.dfm()`
+        *   defining feature equivalency classes, either exclusively (`dfm` option `dictionary`) or as a supplement to uncollapsed features (`dfm` option `thesaurus`)
+        *   `toLower` to consider different cases as equivalent, by converting to lower case
+        
+## Text analysis workflow: Analysis of documents and features
+
+1.  From a corpus.  
+
+    These steps don't necessarily require the processing steps above.
+    * `kwic`
+    * `lexdiv`
+    * `summary`
+        
+2.  From a dfm -- after `dfm` on the processed document and features.
+
+
+## `dfm()`, the Swiss Army knife
+
+1.  Most common use case: from texts or corpus to dfm
+    * most above options are available at this stage
+
+2.  If separate steps are desired
+    * we can still perform same steps on intermediate objects (`tokenizedTexts`) 
+    * we can perform many operations of feature selection, removal, equivalencies on a dfm, or during its creation
+
+
+## Text analysis workflow: Analyzing a dfm
+
+1.  Many analyses are possible directly from the dfm
+    ```{r, eval=FALSE}
+    dfm                           print, show
+    convert                       removeFeatures
+    docfreq                       similarity
+    docnames                      sort
+    features                      textmodel
+    lexdiv                        topfeatures
+    ndoc                          trim
+    ntoken                        weight
+    plot                          settings
+    ```
+
+## Text analysis workflow: Analyzing a dfm (cont.)
+
+2.  Plan is to incorporate wrappers for many `textmodel` functions that work in a similar fashion, e.g.
+    *  text regression
+    *  predictive methods (Naive Bayes, SVM, kNN, etc.)
+    *  scaling methods (Poisson scaling aka "wordfish", correspondence analysis)
+    
+3.  Hands off nicely to other packages needing a dfm
+    * `convert()` converts to formats needed by `topicmodels`, `LDA`, and `STM` packages
+
+###Workflow
+
+This file demonstrates a basic workflow to take some pre-loaded texts and perform elementary text analysis tasks quickly. The `quanteda` packages comes with a built-in set of inaugural addresses from US Presidents. We begin by loading quanteda and examining these texts. The `summary` command will output the name of each text along with the number of types, tokens and sentences contained in the text. Below we use R's indexing syntax to selectivly use the summary command on the first five texts.
+
+```{R}
+require(quanteda)
+# install.packages
+
+require(devtools)
+?install_github
+# devtools
+
+summary(inaugTexts)
+summary(inaugTexts[1:5])
+
+oneText <- inaugTexts[1]
+
+tmp <- inaugTexts[1:5]
+length(inaugTexts)
+length(oneText)
+nchar(oneText)
+nchar(inaugTexts[5:7])
+```
+
+One of the most fundamental text analysis tasks is tokenization. To tokenize a text is to split it into units, most commonly words, which can be counted and to form the basis of a quantitative analysis. The quanteda package has a function for tokenization: `tokenize`. Examine the manual page for this function.
+
+```{R}
+?tokenize
+```
+
+`quanteda`'s tokenize function can be used on a simple character vector, a vector of character vectors, or a corpus. Here are some examples:
+
+```{r}
+tokens <- tokenize('Today is Thursday in Canberra. It is yesterday in London.')
+
+vec <- c(one='This is text one', two='This, however, is the second text')
+tokenize(vec)
+```
+
+Consider the default arguments to the tokenize function. To remove punctuation, you should set the `removePunct` argument to be TRUE. We can combine this with the `toLower` function to get a cleaned and tokenized version of our text.
+
+```{r}
+tokenize(toLower(vec), removePunct = TRUE)
+```
+
+Using this function with the inaugural addresses:
+
+```{r}
+require(dplyr)
+inaugTokens <- tokenize(toLower(inaugTexts))
+inaugTokens[2]
+```
+
+Once each text has been split into words, we can use the `dfm` function to create a matrix of counts of the occurrences of each word in each document:
+
+```{r}
+inaugDfm <- dfm(inaugTokens)
+trimmedInaugDfm <- trim(inaugDfm, minDoc=5, minCount=10)
+weightedTrimmedDfm <- weight(trimmedInaugDfm, type='tfidf')
+
+require(dplyr)
+inaugDfm2 <- dfm(inaugTokens) %>% trim(minDoc=5, minCount=10) %>% weight(type='tfidf')
+```
+
+Note that `dfm()` works on a variety of object types, including character vectors, corpus objects, and tokenized text objects.  This gives the user maximum flexibility and power, while also making it easy to achieve similar results by going directly from texts to a document-by-feature matrix.
+
+To see what objects for which any particular *method* (function) is defined, you can use the `methods()` function:
+```{r}
+methods(dfm)
+```
+
+Likewise, you can also figure out what methods are defined for any given *class* of object, using the same function:
+```{r}
+methods(class = "tokenizedTexts")
+```
+
+If we are interested in analysing the texts with respect to some other variables, we can create a corpus object to associate the texts with this metadata. For example, consider the last six inaugural addresses:
+
+```{r}
+summary(inaugTexts[52:57])
+```
+We can use the `docvars` option to the `corpus` command to record the party with which each text is associated:
+
+```{r}
+dv <- data.frame(Party = c('democrats','democrats','republican','republican','democrats','democrats'))
+recentCorpus <- corpus(inaugTexts[52:57], docvars=dv)
+summary(recentCorpus)
+```
+
+We can use this metadata to combine features across documents when creating a document-feature matrix:
+```{r  fig.width=10, fig.height=8, warning=FALSE}
+partyDfm <- dfm(recentCorpus, groups='Party', ignoredFeatures=(stopwords('english')))
+wordcloud::comparison.cloud(t(as.matrix(partyDfm)),n=100)
+```
+
+
+##Text Manipulation
+
+In this section we will work through some basic string manipulation functions in R.
+
+There are several useful string manipulation functions in the R base library. In addition, we will look at the `stringr` package which provides an additional interface for simple text manipulation.
+
+The fundamental type (or `mode`) in which R stores text is the character vector. The most simple case is a character vector of length one. The `nchar` function returns the number of characters in a character vector. 
+
+```{r message=FALSE}
+require(quanteda)
+s1 <- 'my example text'
+length(s1)
+nchar(s1)
+```
+
+The `nchar` function is vectorized, meaning that when called on a vector it returns a value for each element of the vector.
+```{r }
+s2 <- c('This is', 'my example text.', 'So imaginative.')
+length(s2)
+nchar(s2)
+sum(nchar(s2))
+```
+
+We can use this to answer some simple questions about the inaugural addresses.
+
+Which were the longest and shortest speeches?
+
+```{r}
+which.max(nchar(inaugTexts))
+which.min(nchar(inaugTexts))
+```
+
+Unlike in some other programming languages, it is not possible to index into a string in R:
+
+```{r}
+s1 <- 'This file contains many fascinating example sentences.'
+s1[6:9]
+```
+
+To extract a substring, instead we use the `substr` function. 
+
+```{r}
+s1 <- 'This file contains many fascinating example sentences.'
+substr(s1, 6,9)
+```
+
+Often we would like to split character vectors to extract a term of interest. This is possible using the `strsplit` function. Consider the names of the inaugural texts:
+
+```{r}
+names(inaugTexts)
+# returns a list of parts
+s1 <- 'split this string'
+strsplit(s1, 'this')
+parts <- strsplit(names(inaugTexts), '-')
+years <- sapply(parts, function(x) x[1])
+pres <-  sapply(parts, function(x) x[2])
+```
+
+The `paste` function is used to join character vectors together. The way in which the elements are combined depends on the values of the `sep` and `collapse` arguments:
+
+```{r}
+paste('one','two','three')
+paste('one','two','three', sep='_')
+paste(years, pres, sep='-')
+paste(years, pres, collapse='-')
+```
+
+
+`tolower` and `toupper` change the case of character vectors.
+```{r}
+tolower(s1)
+toupper(s1)
+```
+
+Note that quanteda has a special wrapper for changing case, called `toLower()`, which is better than the built-in `tolower()` and is defined for multiple objects:
+```{r}
+require(quanteda)
+tolower(c("This", "is", "Kεφαλαία Γράμματα"))
+methods(toLower)
+```
+
+
+Charcter vectors can be compared using the `==`  and `%in%` operators:
+```{r}
+tolower(s1) == toupper(s1)
+'apples'=='oranges'
+tolower(s1) == tolower(s1)
+'pears' == 'pears'
+
+c1 <- c('apples', 'oranges', 'pears')
+'pears' %in% c1
+c2 <- c('bananas', 'pears')
+c2 %in% c1
+```
+
+The base functions for searching and replacing within text are similar to familiar commands from the other text manipulation environments, `grep` and `gsub`. The `grep` manual page provides an overview of these functions.
+
+The `grep` command tests whether a pattern occurs within a string:
+
+```{r}
+grep('orangef', 'these are oranges')
+grep('pear', 'these are oranges')
+grep('orange', c('apples', 'oranges', 'pears'))
+grep('pears', c('apples', 'oranges', 'pears'))
+```
+
+The `gsub` command substitutes one pattern for another within a string:
+```{r}
+gsub('oranges', 'apples', 'these are oranges')
+```
+
+In addition to the base string operations, the `stringr` and `stringi` packages provide more extensive and more organized interfaces for string manipulation. Here we will look at some examples from the `stringr` package. You might need to install the `stringr` package using `install.packages`.
+
+For an overview of the most frequently used functions, see the vignette: <https://cran.r-project.org/web/packages/stringr/vignettes/stringr.html>.
+
+For an index to in-depth explanations of each of the functions, see:
+
+```{r}
+require(stringr)
+help(package='stringr')
+```
+
+
+defining a function:
+```{r}
+
+vCount <- function(inText){
+    vowels <- c('a','e','i','o','u')
+    return(sum(str_count(inText, vowels)))
+}
+vCount('Text Analytics')
+```
+
+
+
+Replace with stringr:
+```{r}
+
+help(package='stringr')
+
+fruits <- c("one apple", "two pears", "three bananas")
+str_replace(fruits, "[aeiou]", "-")
+str_replace_all(fruits, "[aeiou]", "-")
+
+str_replace(fruits, "([aeiou])", "")
+str_replace(fruits, "([aeiou])", "\\1\\1")
+str_replace(fruits, "[aeiou]", c("1", "2", "3"))
+str_replace(fruits, c("a", "e", "i"), "-")
+
+fruits <- c("one apple", "two pears", "three bananas")
+str_replace(fruits, "[aeiou]", "-")
+str_replace_all(fruits, "[aeiou]", "-")
+
+str_replace_all(fruits, "([aeiou])", "")
+str_replace_all(fruits, "([aeiou])", "\\1\\1")
+str_replace_all(fruits, "[aeiou]", c("1", "2", "3"))
+str_replace_all(fruits, c("a", "e", "i"), "-")
+
+# If you want to apply multiple patterns and replacements to the same
+# string, pass a named version to pattern.
+str_replace_all(str_c(fruits, collapse = "---"),
+ c("one" = 1, "two" = 2, "three" = 3))
+
+```
+
+
+Regex with stringr:
+```{r}
+pattern <- "a.b"
+strings <- c("abb", "a.b")
+str_detect(strings, pattern)
+str_detect(strings, fixed(pattern))
+str_detect(strings, coll(pattern))
+
+
+# Word boundaries
+words <- c("These are   some words.")
+str_count(words, boundary("word"))
+str_split(words, " ")[[1]]
+str_split(words, boundary("word"))[[1]]
+
+# Regular expression variations
+str_extract_all("The Cat in the Hat", "[a-z]+")
+str_extract_all("The Cat in the Hat", regex("[a-z]+", TRUE))
+
+str_extract_all("a\nb\nc", "^.")
+str_extract_all("a\nb\nc", regex("^.", multiline = TRUE))
+
+str_extract_all("a\nb\nc", "a.")
+str_extract_all("a\nb\nc", regex("a.", dotall = TRUE))
+
+```
+
+
+Trim:
+```{r}
+str_trim("  String with trailing and leading white space\t")
+str_trim("\n\nString with trailing and leading white space\n\n")
+```
+
+To extract texts from a quanteda corpus object, the command is very simple:
+```{r}
+mytexts <- texts(subset(inaugCorpus, President == "Washington"))
+str(mytexts)
+```
+
+
+```{r}
+fruit <- c("apple", "banana", "pear", "pinapple")
+str_detect(fruit, "e")
+fruit[str_detect(fruit, "e")]
+str_detect(fruit, "^a")
+str_detect(fruit, "a$")
+str_detect(fruit, "b")
+str_detect(fruit, "[aeiou]")
+
+# Also vectorised over pattern
+str_detect("aecfg", letters)
+
+```
+##File Import
+
+In this section we will show how to load texts from different file sources. The `quanteda` package loads a corpus from a `corpusSource', which is created using the `textfile` command.
+
+### Three ways to create a `corpus` object
+
+**quanteda can construct a `corpus` object** from several input sources:
+
+1.  a character vector object  
+    ```{r}
+    require(quanteda)
+    myTinyCorpus <- corpus(inaugTexts[1:2], notes = "Just G.W.")
+    summary(myTinyCorpus)
+    ```
+    
+2.  a `VCorpus` object from the **tm** package, and
+    ```{r}
+    require(tm)
+    data(crude, package = "tm")
+    myTmCorpus <- corpus(crude)
+    summary(myTmCorpus, 5)
+    detach()
+    ```
+
+3.  a `corpusSource` object, created by `textfile()`.
+
+    In most cases you will need to load input files from outside of R, so you will use this third method.  The remainder of this tutorial focuses on `textfile()`, which is designed to be a simple, powerful, and all-purpose method to load texts.
+
+### Using `textfile()` to import texts
+
+In the simplest case, we would like to load a set of texts in plain text files from a single directory. To do this, we use the `textfile` command, and use the 'glob' operator '*' to indicate that we want to load multiple files:
+
+```{r message=FALSE}
+setwd("C:/Users/lalit/Dropbox/NEU_Curriculum/SEM4-Fall16/Advances Data Science_Architecture/GitLocal/TextAnalytics_Demo/3_file_import")
+myCorpus <- corpus(textfile(file='inaugural/*.txt'))
+myCorpus <- corpus(textfile(file='sotu/*.txt'))
+```
+
+Often, we have metadata encoded in the names of the files. For example, the inaugural addresses contain the year and the president's name in the name of the file. With the `docvarsfrom` argument, we can instruct the `textfile` command to consider these elements as document variables.
+
+```{r}
+mytf <- textfile("C:/Users/lalit/Dropbox/NEU_Curriculum/SEM4-Fall16/Advances Data Science_Architecture/GitLocal/TextAnalytics_Demo/3_file_import/inaugural/*.txt", docvarsfrom="filenames", dvsep="-", docvarnames=c("Year", "President"))
+inaugCorpus <- corpus(mytf)
+summary(inaugCorpus, 5)
+```
+
+If the texts and document variables are stored separately, we can easily add document variables to the corpus, as long as the data frame containing them is of the same length as the texts:
+
+```{r}
+SOTUdocvars <- read.csv("C:/Users/lalit/Dropbox/NEU_Curriculum/SEM4-Fall16/Advances Data Science_Architecture/GitLocal/TextAnalytics_Demo/3_file_import/SOTU_metadata.csv", stringsAsFactors = FALSE)
+SOTUdocvars$Date <- as.Date(SOTUdocvars$Date, "%B %d, %Y")
+SOTUdocvars$delivery <- as.factor(SOTUdocvars$delivery)
+SOTUdocvars$type <- as.factor(SOTUdocvars$type)
+SOTUdocvars$party <- as.factor(SOTUdocvars$party)
+SOTUdocvars$nwords <- NULL
+
+sotuCorpus <- corpus(textfile(file='sotu/*.txt'), encodingFrom = "UTF-8-BOM")
+docvars(sotuCorpus) <- SOTUdocvars
+```
+
+Another common case is that our texts are stored alongside the document variables in a structured file, such as a json, csv or excel file. The textfile command can read in the texts and document variables simultaneously from these files when the name of the field containing the texts is specified.
+```{r}
+#setwd("C:/Users/lalit/Dropbox/NEU_Curriculum/SEM4-Fall16/Advances Data Science_Architecture/GitLocal/TextAnalytics_Demo/3_file_import/")
+#tf1 <- textfile(file='inaugTexts.csv', textField = 'inaugSpeech',row.names = NULL)
+#myCorpus1 <- corpus(tf1)
+
+
+#tf2 <- textfile("text_example.csv", textField = "Title")
+#myCorpus2 <- corpus(tf2)
+#head(docvars(tf2))
+```
+
+Once the we have loaded a corpus with some document level variables, we can subset the corpus using these variables, create document-feature matrices by aggregating on the variables, or extract the texts concatenated by variable.
+
+```{r}
+recentCorpus <- subset(inaugCorpus, Year > 1980)
+oldCorpus <- subset(inaugCorpus, Year < 1880)
+
+#install.packages("dplyr")
+require(dplyr)
+demCorpus <- subset(sotuCorpus, party == 'Democratic')
+demFeatures <- dfm(demCorpus, ignoredFeatures=stopwords('english')) %>%
+    trim(minDoc=3, minCount=5) %>% weight(type='tfidf') %>% topfeatures
+demFeatures
+
+repCorpus <- subset(sotuCorpus, party == 'Republican') 
+repFeatures <- dfm(repCorpus, ignoredFeatures=stopwords('english')) %>%
+    trim(minDoc=3, minCount=5) %>% weight(type='tfidf') %>% topfeatures
+repFeatures
+```
+
+The `quanteda` corpus objects can be combined using the `+` operator:
+```{r}
+inaugCorpus <- demCorpus + repCorpus
+allFeatures <- dfm(inaugCorpus, ignoredFeatures=stopwords('english'))%>%
+    trim(minDoc=3, minCount=5) %>% weight(type='tfidf') %>% topfeatures
+allFeatures
+```
+
+It should also be possible to load a zip file containing texts directly from a url. However, whether this operation succeeds or not can depend on access permission settings on your particular system (i.e. fails on Windows):
+
+```{r eval=FALSE}
+immigfiles <- textfile("https://github.com/kbenoit/ME114/raw/master/day8/UKimmigTexts.zip")
+mycorpus <- corpus(immigfiles)
+summary(mycorpus)
+```
+
+### Preparing Texts
+
+Here we will step through the basic elements of preparing a text for analysis.  These are tokenization, conversion to lower case, stemming, removing or selecting features, and defining equivalency classes for features, including the use of dictionaries.
+
+
+### 1. Tokenization
+
+Tokenization in quanteda is very *conservative*: by default, it only removes separator characters.
+
+```{r}
+require(quanteda, quietly = TRUE, warn.conflicts = FALSE)
+txt <- c(text1="This is $10 in 999 different ways,\n up and down; left and right!",
+         text2="@kenbenoit working: on #quanteda 2day\t4ever, http://textasdata.com?page=123.")
+tokenize(txt)
+tokenize(txt, verbose=TRUE) ## Gives what is being done behind the scenes
+tokenize(txt, removeNumbers=TRUE, removePunct=TRUE)
+tokenize(txt, removeNumbers=FALSE, removePunct=TRUE)
+tokenize(txt, removeNumbers=TRUE, removePunct=FALSE)
+tokenize(txt, removeNumbers=FALSE, removePunct=FALSE)
+tokenize(txt, removeNumbers=FALSE, removePunct=FALSE, removeSeparators=FALSE)
+```
+
+There are several options to the `what` argument: 
+```{r}
+# sentence level
+tokenize(c("Kurt Vongeut said; only assholes use semi-colons.",
+           "Today is Thursday in Canberra:  It is yesterday in London.",
+           "Today is Thursday in Canberra:  \nIt is yesterday in London.",
+           "To be?  Or\not to be?"),
+          what = "sentence")
+tokenize(inaugTexts[2], what = "sentence")
+
+# character level
+tokenize("My big fat text package.", what="character")
+tokenize("My big fat text package.", what="character", removeSeparators=FALSE)
+```
+
+Two other options, for really fast and simple tokenization are `"fastestword"` and `"fasterword"`, if performance is a key issue.  These are less intelligent than the boundary detection used in the default `"word"` method, which is based on stringi\ICU boundary detection.
+
+### 2. Conversion to lower case
+
+This is a tricky one in our workflow, since it is a form of equivalency declaration, rather than a tokenization step.  It turns out that it is more efficient to perform at the pre-tokenization stage. 
+
+As a result, the method `toLower()` is defined for many classes of quanteda objects.
+```{r}
+methods(toLower)
+```
+
+We include options designed to preserve acronyms.
+```{r}
+test1 <- c(text1 = "England and France are members of NATO and UNESCO",
+           text2 = "NASA sent a rocket into space.")
+toLower(test1)
+toLower(test1, keepAcronyms = TRUE)
+
+test2 <- tokenize(test1, removePunct=TRUE)
+toLower(test2)
+toLower(test2, keepAcronyms = TRUE)
+```
+
+toLower is based on stringi, and is therefore nicely Unicode compliant.
+```{r}
+# Russian
+cat(iconv(encodedTexts[8], "windows-1251", "UTF-8"))
+cat(toLower(iconv(encodedTexts[8], "windows-1251", "UTF-8")))
+head(toLower(stopwords("russian")), 20)
+
+# Arabic
+cat(iconv(encodedTexts[6], "ISO-8859-6", "UTF-8"))
+cat(toLower(iconv(encodedTexts[6], "ISO-8859-6", "UTF-8")))
+head(toLower(stopwords("arabic")), 20)
+```
+
+**Note**: dfm, the Swiss army knife, converts to lower case by default, but this can be turned off using the `toLower = FALSE` argument.
+
+### 3. Removing and selecting features
+
+This can be done when creating a dfm:
+```{r}
+# with English stopwords and stemming
+dfmsInaug2 <- dfm(inaugCorpus,ignoredFeatures = stopwords("english"), stem = TRUE)
+```
+
+
+Or can be done **after** creating a dfm:
+```{r}
+myDfm <- dfm(c("My Christmas was ruined by your opposition tax plan.",
+               "Does the United_States or Sweden have more progressive taxation?"),
+             toLower = FALSE, verbose = FALSE)
+selectFeatures(myDfm, c("s$", ".y"), "keep", valuetype = "regex")
+selectFeatures(myDfm, c("s$", ".y"), "remove", valuetype = "regex")
+selectFeatures(myDfm, stopwords("english"), "keep", valuetype = "fixed")
+selectFeatures(myDfm, stopwords("english"), "remove", valuetype = "fixed")
+```
+
+More examples:
+```{r}
+
+# removing stopwords
+testText <- "The quick brown fox named Seamus jumps over the lazy dog also named Seamus, with
+             the newspaper from a boy named Seamus, in his mouth."
+testCorpus <- corpus(testText)
+# note: "also" is not in the default stopwords("english")
+features(dfm(testCorpus, ignoredFeatures = stopwords("english")))
+# for ngrams
+features(dfm(testCorpus, ngrams = 2, ignoredFeatures = stopwords("english")))
+features(dfm(testCorpus, ngrams = 1:2, ignoredFeatures = stopwords("english")))
+
+## removing stopwords before constructing ngrams
+tokensAll <- tokenize(toLower(testText), removePunct = TRUE)
+tokensNoStopwords <- removeFeatures(tokensAll, stopwords("english"))
+tokensNgramsNoStopwords <- ngrams(tokensNoStopwords, 2)
+features(dfm(tokensNgramsNoStopwords, ngrams = 1:2))
+
+# keep only certain words
+dfm(testCorpus, keptFeatures = "*s", verbose = FALSE)  # keep only words ending in "s"
+dfm(testCorpus, keptFeatures = "s$", valuetype = "regex", verbose = FALSE)
+
+# testing Twitter functions
+testTweets <- c("My homie @justinbieber #justinbieber shopping in #LA yesterday #beliebers",
+                "2all the ha8ers including my bro #justinbieber #emabiggestfansjustinbieber",
+                "Justin Bieber #justinbieber #belieber #fetusjustin #EMABiggestFansJustinBieber")
+dfm(testTweets, keptFeatures = "#*", removeTwitter = FALSE)  # keep only hashtags
+dfm(testTweets, keptFeatures = "^#.*$", valuetype = "regex", removeTwitter = FALSE)
+```
+
+
+One very nice feature, recently added, is the ability to create a new dfm with the same feature set as the old.  This is very useful, for instance, if we train a model on one dfm, and need to predict on counts from another, but need the feature set to be equivalent.
+```{r}
+# selecting on a dfm
+textVec1 <- c("This is text one.", "This, the second text.", "Here: the third text.")
+textVec2 <- c("Here are new words.", "New words in this text.")
+features(dfm1 <- dfm(textVec1))
+features(dfm2a <- dfm(textVec2))
+(dfm2b <- selectFeatures(dfm2a, dfm1))
+identical(features(dfm1), features(dfm2b))
+```
+
+### 4. Applying equivalency classes: dictionaries, thesaruses
+
+Dictionary creation is done through the `dictionary()` function, which classes a named list of characters as a dictionary.
+```{r}
+# import the Laver-Garry dictionary from http://bit.ly/1FH2nvf
+lgdict <- dictionary(file="http://www.kenbenoit.net/courses/essex2014qta/LaverGarry.cat",
+                     format="wordstat")
+dfdict <- dfm(inaugTexts, dictionary=lgdict)
+
+```
+
+We apply dictionaries to a dfm using the `applyDictionary()` function.  Through the `valuetype`, argument, we can match patterns of one of three types: `"glob"`, `"regex"`, or `"fixed"`.
+```{r}
+require(quanteda)
+myDict <- dictionary(list(christmas = c("Christmas", "Santa", "holiday"),
+                          opposition = c("Opposition", "reject", "notincorpus"),
+                          taxglob = "tax*",
+                          taxregex = "tax.+$",
+                          country = c("United_States", "Sweden")))
+myDfm <- dfm(c("My Christmas was ruined by your opposition tax plan.",
+               "Does the United_States or Sweden have more progressive taxation?"),
+             ignoredFeatures = stopwords("english"), verbose = FALSE)
+myDfm
+
+# glob format
+applyDictionary(myDfm, myDict, valuetype = "glob")
+applyDictionary(myDfm, myDict, valuetype = "glob", case_insensitive = FALSE)
+
+# regex v. glob format: note that "united_states" is a regex match for "tax*"
+applyDictionary(myDfm, myDict, valuetype = "glob")
+applyDictionary(myDfm, myDict, valuetype = "regex", case_insensitive = TRUE)
+
+# fixed format: no pattern matching
+applyDictionary(myDfm, myDict, valuetype = "fixed")
+applyDictionary(myDfm, myDict, valuetype = "fixed", case_insensitive = FALSE)
+```
+
+It is also possible to pass through a dictionary at the time of `dfm()` creation.
+```{r}
+# dfm with dictionaries
+
+mycorpus <- subset(inaugCorpus, Year>1900)
+mydict <- dictionary(list(christmas=c("Christmas", "Santa", "holiday"),
+                          opposition=c("Opposition", "reject", "notincorpus"),
+                          taxing="taxing",
+                          taxation="taxation",
+                          taxregex="tax*",
+                          country="united states"))
+dictDfm <- dfm(mycorpus, dictionary=mydict)
+head(dictDfm)
+```
+
+Finally, there is a related "thesaurus" feature, which collapses words in a dictionary but is not exclusive.
+```{r}
+mytexts <- c("British English tokenises differently, with more colour.",
+             "American English tokenizes color as one word.")
+mydict <- dictionary(list(color = "colo*r", tokenize = "tokeni?e*"))
+dfm(mytexts, thesaurus = mydict)
+```
+
+### 5. Stemming
+
+Stemming relies on the `SnowballC` package's implementation of the Porter stemmer, and is available for the following languages:
+```{r}
+SnowballC::getStemLanguages()
+```
+
+It's not perfect:
+```{r}
+wordstem(c("win", "winning", "wins", "won", "winner"))
+```
+but it's fast.
+
+Stemmed objects must be tokenized, but can be of many different quanteda classes:
+```{r, error = TRUE}
+methods(wordstem)
+wordstem("This is a winning package, of many packages.")
+wordstem(tokenize("This is a winning package, of many packages."))
+head(wordstem(dfm(inaugTexts[1:2], verbose = FALSE)))
+# same as 
+head(dfm(inaugTexts[1:2], stem = TRUE, verbose = FALSE))
+```
+
+### 6. `dfm()` and its many options
+
+Operates on `character` (vectors), `corpus`, or `tokenizedText` objects,
+
+```{r, eval=FALSE}
+## S3 method for class 'character'
+dfm(x, verbose = TRUE, toLower = TRUE,
+  removeNumbers = TRUE, removePunct = TRUE, removeSeparators = TRUE,
+  removeTwitter = FALSE, stem = FALSE, ignoredFeatures = NULL,
+  keptFeatures = NULL, matrixType = c("sparse", "dense"),
+  language = "english", thesaurus = NULL, dictionary = NULL,
+  valuetype = c("glob", "regex", "fixed"), dictionary_regex = FALSE, ...)
+```
+
+###Descriptive
+quanteda has a number of descriptive statistics available for reporting on texts.  The **simplest of these** is through the `summary()` method:
+```{r}
+require(quanteda)
+txt <- c(sent1 = "This is an example of the summary method for character objects.",
+         sent2 = "The cat in the hat swung the bat.")
+summary(txt)
+```
+
+This also works for corpus objects:
+```{r}
+summary(corpus(ukimmigTexts, notes = "Created as a demo."))
+```
+
+To access the **syllables** of a text, we use `syllables()`:
+```{r}
+syllables(c("Superman.", "supercalifragilisticexpialidocious", "The cat in the hat."))
+```
+
+We can even compute the **Scabble value** of English words, using `scrabble()`:
+```{r}
+scrabble(c("cat", "quixotry", "zoo"))
+```
+
+We can analyze the **lexical diversity** of texts, using `lexdiv()` on a dfm:
+```{r}
+
+mytf <- textfile("inaugural/*.txt", docvarsfrom="filenames", dvsep="-", docvarnames=c("Year", "President"))
+inaugCorpus <- corpus(mytf)                   
+myDfm <- dfm(subset(inaugCorpus, Year > 1980), verbose = FALSE)
+lexdiv(myDfm, "R")
+dotchart(sort(lexdiv(myDfm, "R")),color = "red")
+```
+
+We can analyze the **readability** of texts, using `readability()` on a vector of texts or a corpus:
+```{r}
+readab <- readability(subset(inaugCorpus, Year > 1980), measure = "Flesch.Kincaid")
+dotchart(sort(readab))
+```
+
+We can **identify documents and terms that are similar to one another**, using `similarity()`:
+```{r}
+## Presidential Inaugural Address Corpus
+presDfm <- dfm(inaugCorpus, ignoredFeatures = stopwords("english"))
+# compute some document similarities
+similarity(presDfm, "1985-Reagan.txt", n=5, margin="documents")
+similarity(presDfm, c("2009-Obama.txt" , "2013-Obama.txt"), n=5, margin="documents", method = "cosine")
+similarity(presDfm, c("2009-Obama.txt" , "2013-Obama.txt"), n=5, margin="documents", method = "Hellinger")
+similarity(presDfm, c("2009-Obama.txt" , "2013-Obama.txt"), n=5, margin="documents", method = "eJaccard")
+
+# compute some term similarities
+#similarity(presDfm, c("fair", "health", "terror"), method="cosine")
+```
+
+And this can be used for **clustering documents**:
+```{r, fig.height=6, fig.width=10}
+x <- matrix(rnorm(100), nrow = 5)
+dist(x)
+
+
+data(SOTUCorpus, package="quantedaData")
+presDfm <- dfm(subset(SOTUCorpus, lubridate::year(Date)>1981), verbose=FALSE, stem=TRUE,
+               ignoredFeatures=stopwords("english", verbose=FALSE))
+presDfm <- trim(presDfm, minCount=5, minDoc=3)
+# hierarchical clustering - get distances on normalized dfm
+presDistMat <- dist(as.matrix(weight(presDfm, "relFreq")))
+# hiarchical clustering the distance object
+presCluster <- hclust(presDistMat)
+# label with document names
+presCluster$labels <- docnames(presDfm)
+# plot as a dendrogram
+plot(presCluster)
+```
+
+Or we could look at **term clustering** insteadd:
+```{r, fig.height=8, fig.width=12}
+# word dendrogram with tf-idf weighting
+wordDfm <- sort(weight(presDfm, "tfidf"))
+wordDfm <- t(wordDfm)[1:100,]  # because transposed
+wordDistMat <- dist(wordDfm)
+wordCluster <- hclust(wordDistMat)
+plot(wordCluster, xlab="", main="tf-idf Frequency weighting")
+```
+
+Finally, there are number of helper functions to extract information from quanteda objects:
+```{r}
+myCorpus <- subset(inaugCorpus, Year > 1980)
+
+# return the number of documents
+ndoc(myCorpus)           
+ndoc(dfm(myCorpus, verbose = FALSE))
+
+# how many tokens (total words)
+ntoken(myCorpus)
+ntoken("How many words in this sentence?")
+# arguments to tokenize can be passed 
+ntoken("How many words in this sentence?", removePunct = TRUE)
+
+# how many types (unique words)
+ntype(myCorpus)
+ntype("Yada yada yada.  (TADA.)")
+ntype("Yada yada yada.  (TADA.)", removePunct = TRUE)
+ntype(toLower("Yada yada yada.  (TADA.)"), removePunct = TRUE)
+
+# can count documents and features
+ndoc(inaugCorpus)
+myDfm1 <- dfm(inaugCorpus, verbose = FALSE)
+ndoc(myDfm1)
+nfeature(myDfm1)
+myDfm2 <- dfm(inaugCorpus, ignoredFeatures = stopwords("english"), stem = TRUE, verbose = FALSE)
+nfeature(myDfm2)
+
+# can extract feature labels and document names
+head(features(myDfm1), 20)
+head(docnames(myDfm1))
+
+# and topfeatures
+topfeatures(myDfm1)
+topfeatures(myDfm2) # without stopwords
+
+```
+### Advanced
+
+In this section we will explore some text analysis and analysis of metadata from a corpus of tweets retrieved from the Twitter API. The tweets are a small sample from a collection of tweets relating to the European Parliament elections of 2015.
+
+Load the data frame containing the sample tweets:
+
+```{r}
+require(quanteda)
+setwd("C:/Users/lalit/Dropbox/NEU_Curriculum/SEM4-Fall16/Advances Data Science_Architecture/GitLocal/TextAnalytics_Demo/6_advanced")
+load("tweetSample.RData")
+str(tweetSample)
+```
+
+
+```{r}
+require(lubridate)
+require(dplyr)
+tweetSample <- mutate(tweetSample, day = yday(created_at))
+tweetSample <- mutate(tweetSample, dayDate = as.Date(day-1, origin = "2014-01-01"))
+juncker <- filter(tweetSample, grepl('juncker', text, ignore.case=TRUE)) %>% mutate(kand='Juncker')
+schulz <- filter(tweetSample, grepl('schulz', text, ignore.case=TRUE))  %>% mutate(kand='Schulz')
+verhof <- filter(tweetSample, grepl('verhofstadt', text, ignore.case=TRUE)) %>% mutate(kand='Verhofstadt')
+spitzAll <- bind_rows(juncker, schulz, verhof)
+```
+
+Once the data is in the correct format, we can use ggplot to display the candidate mentions on the a single plot:
+
+
+```{r}
+require(ggplot2)
+require(scales)
+# mentioning kandidates names over time
+plotDf <- count(spitzAll, kand, day=day)  %>% mutate(day=as.Date(day-1, origin = "2014-01-01"))
+
+ggplot(data=plotDf, aes(x=day, y=n, colour=kand)) + 
+    geom_line(size=1) +
+    scale_y_continuous(labels = comma) + geom_vline(xintercept=as.numeric(as.Date("2014-05-15")), linetype=4) +
+    geom_vline(xintercept=as.numeric(as.Date("2014-05-25")), linetype=4) +
+    theme(axis.text=element_text(size=12),
+          axis.title=element_text(size=14,face="bold"))
+```
+
+
+We can use the `keptFeatures` argument to `dfm()` to analyse only hashtags for each candidate's text.
+```{r}
+# Top hashtags for tweets that mention Juncker
+dv <- data.frame(user = juncker$user_screen_name)
+jCorp <- corpus(juncker$text, docvars = dv)
+jd <- dfm(jCorp)
+jd <- selectFeatures(jd, "^#.*", "keep", valuetype = "regex") 
+# equivalent: jd <- selectFeatures(jd, "#*", "keep", valuetype = "glob") 
+topfeatures(jd, nfeature(jd))
+```
+
+
+## Further analysis examples
+Wordscores:
+```{r}
+data(amicusCorpus, package = "quantedaData")
+refs <- docvars(amicusCorpus, "trainclass")
+refs <- (as.numeric(refs) - 1.5)*2
+amicusDfm <- dfm(amicusCorpus, verbose = FALSE)
+wm <- textmodel(amicusDfm, y = refs, model = "wordscores")
+summary(wm)
+preds <- predict(wm, newdata = amicusDfm)
+summary(preds)
+plot(preds@textscores$textscore_raw ~ docvars(amicusCorpus, "testclass"),
+     horizontal = TRUE, xlab = "Predicted document score",
+     ylab = "Test class", las = 1)
+```
+
+Correspondence analysis:
+```{r, fig.width = 6, fig.height = 6}
+ieDfm <- dfm(ie2010Corpus, verbose = FALSE)
+ieCA <- textmodel(ieDfm, model = "ca")
+require(ca)
+plot(ieCA, what = c("all", "none"))
+```
+
+Poisson scaling:
+```{r, fig.width = 6, fig.height = 4}
+ieWF <- textmodel(ieDfm, model = "wordfish")
+summary(ieWF)
+dotchart(ieWF@theta, 
+         labels = paste(docvars(ie2010Corpus, "name"), docvars(ie2010Corpus, "party")))
+```
+
+
+Topic models:
+```{r}
+install.packages("topicmodels")
+require(topicmodels)
+mycorpus <- subset(inaugCorpus, Year>1950)
+quantdfm <- dfm(mycorpus, verbose=FALSE, stem=TRUE,
+                ignoredFeatures=c(stopwords('english'),'will','us','nation', 'can','peopl*','americ*'))
+ldadfm <- convert(quantdfm, to="topicmodels")
+lda <- LDA(ldadfm, control = list(alpha = 0.1), k=20)
+terms(lda, 10)
+```
+
+
+### Extra Demo
+
+
+require(quanteda)
+
+#help(package="quanteda")
+
+## create a corpus from a text vector of UK immigration texts already loaded in R memory
+
+summary(ukimmigTexts)
+str(ukimmigTexts)
+encoding(ukimmigTexts)
+encoding(encodedTexts)
+
+# create a corpus from immigration texts
+immigCorpus <- corpus(ukimmigTexts, notes="Created as part of a demo.")
+View(immigCorpus$documents)
+
+#Add document level variables like Year to the corpus  
+docvars(immigCorpus) <- data.frame(party = docnames(immigCorpus), year = 2010)
+summary(immigCorpus)
+
+# explore using kwic function to find key words.Check the help function?kwic
+#Finding immigrants deported as keyword and window idenfis number of words around the context
+kwic(immigCorpus, "deport", window = 3)
+kwic(immigCorpus, "illegal immig*", window = 3)
+
+# extract a document-feature matrix. Taking only one ducment. DFM does all the tokenizing,stemming,etc
+immigDfm <- dfm(subset(immigCorpus, party=="BNP"))
+plot(immigDfm)
+immigDfm <- dfm(subset(immigCorpus, party=="BNP"), ignoredFeatures = stopwords("english"))
+plot(immigDfm, random.color = TRUE, rot.per = .25, colors = sample(colors()[2:128], 5))
+
+# change units to sentences
+immigCorpusSent <- changeunits(immigCorpus, to = "sentences")
+summary(immigCorpusSent, 20)
+
+
+## tokenize some texts
+txt <- "#TextAnalysis is MY <3 4U @myhandle gr8 #stuff :-)"
+tokenize(txt, removePunct=TRUE)
+tokenize(txt, removePunct=TRUE, removeTwitter=TRUE)
+(toks <- tokenize(toLower(txt), removePunct=TRUE, removeTwitter=TRUE))
+str(toks)
+
+# tokenize sentences
+(sents <- tokenize(ukimmigTexts[1], what = "sentence", simplify = TRUE)[1:5])
+# tokenize characters
+tokenize(ukimmigTexts[1], what = "character", simplify = TRUE)[1:100]
+
+
+## some descriptive statistics
+
+## create a document-feature matrix from the inaugural corpus
+##  57 US president inaugural speeches
+
+summary(inaugCorpus)
+presDfm <- dfm(inaugCorpus)
+presDfm
+docnames(presDfm)
+# concatenate by president name                 
+presDfm <- dfm(inaugCorpus, groups="President")
+presDfm
+docnames(presDfm)
+
+# need first to install quantedaData, using
+devtools::install_github("kbenoit/quantedaData")
+## show some selection capabilities on Irish budget corpus
+data(iebudgetsCorpus, package = "quantedaData")
+summary(iebudgetsCorpus, 10)
+ieFinMin <- subset(iebudgetsCorpus, number=="01" & debate == "BUDGET")
+summary(ieFinMin)
+dfmFM <- dfm(ieFinMin)
+View(ieFinMin$documents)
+
+#This plot shows the speeches has lexcial diversity over the years
+plot(2008:2012, lexdiv(dfmFM, "C"), xlab="Year", ylab="Herndan's C", type="b",
+     main = "World's Crudest Lexical Diversity Plot")
+
+
+# plot some readability statistics
+#State of the Union (SOTU) data
+#The Flesch–Kincaid readability tests are readability tests designed to indicate how difficult a reading passage in English is to understand.
+#There are two tests, the Flesch Reading Ease, and the Flesch–Kincaid Grade Level. 
+#Although they use the same core measures (word length and sentence length), they have different weighting factors.
+data(SOTUCorpus, package = "quantedaData")
+fk <- readability(SOTUCorpus, "Flesch.Kincaid")
+
+##Lubricating date in the corpus
+#install.packages("lubridate")
+require("lubridate")
+year <- lubridate::year(docvars(SOTUCorpus, "Date"))
+require(ggplot2)
+partyColours <- c("blue", "blue", "black", "black", "red", "red")
+p <- ggplot(data = docvars(SOTUCorpus), aes(x = year, y = fk)) + #, group = delivery)) +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.background = element_blank(),
+          axis.line = element_line(colour = "black")) +
+    geom_smooth(alpha=0.2, linetype=1, color="grey70", method = "loess", span = .34) +
+    xlab("") +
+    ylab("Flesch-Kincaid") +
+    geom_point(aes(colour = party)) +
+    scale_colour_manual(values = partyColours) +
+    geom_line(aes(), alpha=0.3, size = 1) +
+    ggtitle("Text Complexity in State of the Union Addresses") + 
+    theme(plot.title = element_text(lineheight=.8, face="bold"))
+quartz(height=7, width=12)
+print(p)
+
+
+## Presidential Inaugural Address Corpus
+presDfm <- dfm(inaugCorpus, ignoredFeatures = stopwords("english"))
+# compute some document similarities
+# n is for number and margin is on level either documents or features
+similarity(presDfm, "1985-Reagan.txt", n=5, margin="documents")
+similarity(presDfm, c("2009-Obama" , "2013-Obama"), n=5, margin="documents", method = "cosine")
+similarity(presDfm, c("2009-Obama" , "2013-Obama"), n=5, margin="documents", method = "Hellinger")
+similarity(presDfm, c("2009-Obama" , "2013-Obama"), n=5, margin="documents", method = "eJaccard")
+
+# compute some term similarities
+#similarity(presDfm, c("fair", "health", "terror"), method="cosine")
+
+
+
+## mining collocations
+
+# form ngrams
+txt <- "Hey @kenbenoit #textasdata: The quick, brown fox jumped over the lazy dog!"
+(toks1 <- tokenize(toLower(txt), removePunct = TRUE))
+tokenize(toLower(txt), removePunct = TRUE, ngrams = 2)
+tokenize(toLower(txt), removePunct = TRUE, ngrams = c(1,3))
+
+# low-level options exist too (note: Need to port to C++)
+ngrams(toks1, c(1, 3, 5))
+
+# form "skip-grams"
+tokens <- tokenize(toLower("Insurgents killed in ongoing fighting."),
+                   removePunct = TRUE, simplify = TRUE)
+skipgrams(tokens, n = 2, k = 2, concatenator = " ",skip = 0)
+skipgrams(tokens, n = 3, k = 2, concatenator = " ",skip = 0)
+
+# mine bigrams
+collocs2 <- collocations(inaugTexts, size = 2, method = "all")
+head(collocs2, 20)
+
+# mine trigrams
+collocs3 <- collocations(inaugTexts, size = 3, method = "all")
+head(collocs3, 20)
+
+# remove parts of speech and inspect
+head(removeFeatures(collocs2, stopwords("english")), 20)
+head(removeFeatures(collocs3, stopwords("english")), 20)
+
+
+

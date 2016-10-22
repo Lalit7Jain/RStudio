@@ -1,0 +1,71 @@
+remove(list = c("modeldata","mat.df","df","train","test","knn.pred","conf.mat","accu"))
+set.seed(100)
+
+# Packages
+library(tm) # Text mining: Corpus and Document Term Matrix
+library(class) # KNN model
+library(SnowballC) # Stemming words
+#install.packages("caret")
+#library(caret)
+
+# Read csv with two columns: text and category
+setwd("C:/Users/lalit/Dropbox/NEU_Curriculum/SEM4-Fall16/Advances Data Science_Architecture/GitLocal/TextAnalytics_Demo")
+df <- read.csv(file ="knn.csv", sep =";", header = TRUE)
+View(df)
+
+# Create corpus (Only text and not category)
+docs <- Corpus(VectorSource(df$Text))
+inspect(docs)
+
+# Clean corpus
+docs <- tm_map(docs, content_transformer(tolower))
+docs <- tm_map(docs, removeNumbers)
+docs <- tm_map(docs, removeWords, stopwords("english"))
+docs <- tm_map(docs, removePunctuation)
+docs <- tm_map(docs, stripWhitespace)
+docs <- tm_map(docs, stemDocument, language = "english")
+
+
+# Create dtm
+dtm <- DocumentTermMatrix(docs)
+dtm
+
+# Transform dtm to matrix to data frame - df is easier to work with
+mat.df <- as.data.frame(data.matrix(dtm), stringsAsfactors = FALSE)
+
+# Column bind category (known classification)
+mat.df <- cbind(mat.df, df$Category)
+
+# Change name of new column to "category"
+colnames(mat.df)[ncol(mat.df)] <- "category"
+
+# Split data by rownumber into two equal portions
+train <- sample(nrow(mat.df), ceiling(nrow(mat.df) * .50))
+test <- (1:nrow(mat.df))[- train]
+
+# Isolate classifier
+cl <- mat.df[, "category"]
+
+# Create model data and remove "category"
+modeldata <- mat.df[,!colnames(mat.df) %in% "category"]
+
+# Create model: training set, test set, training set classifier
+knn.pred <- knn(modeldata[train, ], modeldata[test, ], cl[train])
+
+
+# Confusion matrix
+conf.mat <- table("Predictions" = knn.pred, Actual = cl[test])
+conf.mat
+
+# Accuracy
+accu <- (accuracy <- sum(diag(conf.mat))/length(test) * 100)
+accu
+
+# Create data frame with test data and predicted category
+df.pred <- cbind(knn.pred, modeldata[test, ])
+write.table(df.pred, file="output.csv", sep=";")
+
+
+#set.seed(1234)
+#train_control <- trainControl(method = "repeatedcv",number = 10,repeats = 3)
+#modelcv <- train(x = mat.df,y=c("Ford","Mazda"), data = modeldata[train, ],method = "knn",trControl = train_control,preProcess = c("center","scale"), tuneLength = 20)
