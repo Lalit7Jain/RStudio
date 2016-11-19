@@ -1,0 +1,422 @@
+,Column1,Value1,Value2,Value3,Value4,Value5
+0, , 09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005
+1,Number of BHCs in Peer Group, 66,66,66,68,69EARNINGS AND PROFITABILITY--------------------------
+2,PERCENT OF AVERAGE ASSETS:, , , , , 
+3,Net Interest Income (TE), 2.91,3.00,3.00,3.09,3.08
+4,+ Non-interest Income,1.66,1.80,1.64,1.91,2.03
+5,- Overhead Expense, 3.01,2.92,2.96,2.97,3.07
+6,- Provision for Losses, 1.00,0.24,0.36,0.15,0.15
+7,+ Securities Gains (Losses), -0.09,0.01, -0.02, -0.01,0.01
+8,+ Other Tax Equiv Adjustments,0.00,0.00,0.00,0.00,0.00
+9,= Pretax Net Oper Income (TE),0.49,1.61,1.31,1.83,1.93
+10,Net Operating Income, 0.30,1.04,0.86,1.18,1.24
+11,Net Income, 0.27,1.03,0.87,1.21,1.25
+12,Interest Expense, 2.51,3.47,3.44,3.16,2.21
+13,Net Interest Income (TE), 3.25,3.34,3.34,3.42,3.45
+14,"LOSSES, ALLOW, AND PAST DUE+NONACCR:", , , , , 
+15,Net Ln&Ls Losses/Avg Loans & Leases,0.88,0.30,0.38,0.23,0.28
+16,Earnings Coverage of Net Losses (X),2.46, 22.53, 13.40, 33.33, 22.73
+17,Ln&Ls Allowance/Total Loans & Leases, 1.65,1.14,1.22,1.11,1.13
+18,Nonaccr Lns&Ls+RE Acq/Lns&Ls+RE Acq,1.97,0.83,1.08,0.57,0.48
+19,30-89 Days Past Due Loans and Leases, 1.27,0.95,1.03,0.81,0.69
+20,LIQUIDITY AND FUNDING:, , , , , 
+21,Net Noncore Funding Dependence,42.99, 39.86, 40.68, 37.63, 37.84
+22,Net ST Noncore Funding Dependence, 27.48, 25.49, 26.24, 23.42, 23.55
+23,Net Loans and Leases/Total Assets, 64.90, 63.33, 63.88, 62.66, 60.09
+24,CAPITALIZATION:, , , , , 
+25,Tier 1 Leverage Ratio,7.50,7.63,7.42,7.79,7.44
+26,Equity Capital/Total Assets,9.02,9.65,9.31,9.22,8.88
+27,Net Loans&Ls/Equity Capital (X),7.53,6.93,7.17,6.97,6.97
+28,Cash Dividends/Net Income, 77.41, 43.71, 50.49, 36.79, 39.81
+29,Cash Dividends/Net Income (Sub S Adjusted),N/A, N/A, N/A, N/A, N/A
+30,Retained Earnings/Avg Equity Cap,-2.37,5.85,3.67,8.58,8.40
+31,PARENT COMPANY RATIOS:, , , , , 
+32,Short-Term Debt/Equity Capital, 4.46,3.27,3.73,3.12,2.55
+33,Long-Term Debt/Equity Capital, 12.98, 11.89, 11.89, 11.77, 12.45
+34,Equity Investment in Subs/Equity Cap, 112.72,111.62,112.58,110.24,108.78
+35,Cash FR Oper+Noncash+Op Exp/Op Exp+Div,98.70,153.20,138.88,134.43,147.51
+36,PERCENT OF AVERAGE ASSETS,09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005
+37,Interest Income (TE), 5.18,6.15,6.13,5.95,5.08
+38,Less: Interest Expense, 2.24,3.10,3.08,2.85,1.98
+39,Equals: Net Interest Income (TE), 2.91,3.00,3.00,3.09,3.08
+40,Plus: Non-Interest Income,1.66,1.80,1.64,1.91,2.03
+41,Equals: Adj Operating Income (TE),4.64,4.84,4.68,4.97,5.15
+42,Less: Overhead Expense, 3.01,2.92,2.96,2.97,3.07
+43,Less: Provision for Loan and Lease Losses,1.00,0.24,0.36,0.15,0.15
+44,Plus: Realized G/L on HTM Sec,0.00,0.00,0.00,0.00,0.00
+45,Plus: Realized G/L on AFS Sec, -0.09,0.01, -0.02, -0.01,0.01
+46,Plus: Other Tax Equiv Adjustments,0.00,0.00,0.00,0.00,0.00
+47,Memo: Net Income (Last Four Qtrs),0.28,1.04,0.85,1.21,1.25
+48,MARGIN ANALYSIS:, , , , , 
+49,Avg Earning Assets / Avg Assets, 89.57, 89.68, 89.70, 90.22, 89.84
+50,Avg Int-Bearing Funds / Avg Assets,77.20, 75.94, 76.48, 75.80, 74.48
+51,Int Income (TE) / Avg Earning Assets, 5.79,6.84,6.82,6.60,5.66
+52,Int Expense / Avg Earning Assets, 2.51,3.47,3.44,3.16,2.21
+53,Interest-Bearing Bank Balances, 3.29,5.29,5.42,5.07,3.49
+54,Fed Funds Sold & Reverse Repos, 2.66,5.32,5.20,5.08,3.24
+55,Trading Assets, 2.62,3.39,3.45,2.87,2.44
+56,Mortgage-Backed Securities, 4.93,4.89,4.89,4.71,4.31
+57,Time Deposits < $100K,3.66,4.50,4.47,3.96,2.90
+58,Other Domestic Deposits,1.51,2.58,2.50,2.26,1.41
+59,All Interest-Bearing Funds, 2.92,4.09,4.04,3.77,2.65
+60, , 09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005
+61,Avg Personnel Exp Per Employee ($000),59,58,75,74,73
+62,Avg Assets per Employee ($000),"5,752"," 5,299"," 5,301"," 5,057"," 4,727"
+63,ANALYSIS RATIOS, , , , , 
+64,Personnel Expense,1.48,1.56,1.52,1.61,1.65
+65,Net Occupancy Expense,0.39,0.40,0.39,0.40,0.42
+66,Personnel Expense, 31.96, 32.33, 32.37, 32.03, 31.93
+67,Net Occupancy Expense,8.57,8.35,8.55,8.03,8.01
+68,Serv Charges on Deposit Accts - Domestic, 7.89,7.45,7.59,6.77,7.11
+69,Trading Revenue,0.38,0.93,0.20,1.15,1.03
+70,Investment Banking Fees & Commissions,3.27,3.22,3.28,3.04,3.71
+71,Venture Capital Revenue,0.05,0.21,0.23,0.19,0.18
+72,Net Servicing Fees, 0.99,0.87,0.82,0.68,1.12
+73,Net Securitization Income,0.16,0.29,0.31,0.37,0.24
+74,Insurance Activities Revenue, 0.99,1.17,1.21,1.24,1.49
+75,"Net Gain (Loss) - Sales Loans, OREO, Oth", 0.31,1.44,0.97,1.36,1.60
+76,Appl Inc Taxes/Pretax NOI (TE),27.81, 30.49, 28.98, 30.50, 31.62
+77,Appl Inc Tax+TE/Pretax NOI+TE, 32.55, 34.12, 32.86, 34.13, 34.72
+78,PERCENT OF TOTAL ASSETS,09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005
+79,Real Estate Loans, 41.39, 40.43, 40.85, 39.85, 37.12
+80,Commercial and Industrial Loans, 13.41, 12.69, 12.81, 11.89, 11.36
+81,Loans to Individuals, 5.23,5.39,5.33,5.36,5.62
+82,Loans to Depository Institutions, 0.11,0.09,0.09,0.11,0.11
+83,Agricultural Loans, 0.20,0.22,0.21,0.21,0.20
+84,Other Loans and Leases, 3.36,3.09,3.26,3.17,3.45
+85, Net Loans and Leases, 64.90, 63.33, 63.88, 62.66, 60.09
+86,Debt Securities Over 1 Year, 12.58, 13.35, 13.05, 13.87, 17.30
+87,Mutual Funds and Equity Securities, 0.16,0.22,0.24,0.26,0.24
+88, Subtotal, 78.36, 77.72, 78.03, 77.54, 79.60
+89,Interest-Bearing Bank Balances, 0.57,0.58,0.50,0.55,0.69
+90,Federal Funds Sold & Reverse Repos, 1.34,2.35,2.24,2.68,2.18
+91,Debt Securities 1 Year or Less, 2.90,3.07,3.08,3.12,1.65
+92,Trading Assets, 1.36,1.64,1.34,1.15,1.51
+93, Total Earning Assets, 86.69, 87.35, 87.60, 88.10, 87.92
+94,Non-Int Cash and Due From Dep Inst, 2.31,2.05,2.28,2.38,2.74
+95,Other Real Estate Owned,0.18,0.08,0.10,0.06,0.04
+96,U.S. Treasury Securities, 0.13,0.16,0.14,0.32,0.46
+97,U.S. Agency Securities (excl MBS),1.66,2.82,2.38,3.46,3.19
+98,Municipal Securities, 1.06,1.14,1.13,1.07,0.89
+99,Mortgage-Backed Securities, 9.98,9.59,9.64,9.68, 11.62
+100,Asset-Backed Securities,0.49,0.30,0.35,0.22,0.25
+101,Other Debt Securities,0.52,0.71,0.75,0.60,0.74
+102,RE Loans Secured by 1-4 Family,16.26, 16.34, 16.28, 16.64, 17.72
+103,Revolving,4.14,3.72,3.71,3.86,4.51
+104,"Closed-End, Sec by First Liens",10.16, 10.59, 10.54, 10.76, 11.62
+105,"Closed-End, Sec by Junior Liens",1.60,1.77,1.76,1.67,1.38
+106,Commercial Real Estate Loans,22.75, 21.71, 22.22, 20.91, 17.20
+107,Construction and Land Dev,7.77,8.04,8.05,7.45,5.51
+108,Multifamily,1.55,1.34,1.35,1.55,1.22
+109,Nonfarm Nonresidential,12.55, 11.35, 11.82, 11.02,9.86
+110,RE Loans Secured by Farmland, 0.28,0.27,0.27,0.23,0.21
+111,"LOAN MIX, % OF GROSS LOANS & LEASES:", , , , , 
+112,Real Estate Loans, 61.60, 61.79, 61.95, 61.98, 60.26
+113,RE Loans Secured by 1-4 Family,24.80, 26.11, 25.69, 26.62, 29.55
+114,Revolving,6.16,5.69,5.63,5.88,7.07
+115,Closed-End,18.22, 20.01, 19.66, 20.25, 21.93
+116,Commercial Real Estate Loans,33.31, 32.79, 33.36, 31.92, 27.42
+117,Construction and Land Dev, 11.27, 12.03, 11.91, 11.10,8.61
+118,Multifamily,2.31,2.06,2.04,2.44,2.00
+119,Nonfarm Nonresidential,18.23, 17.16, 17.77, 16.60, 15.76
+120,RE Loans Secured by Farmland, 0.39,0.40,0.40,0.34,0.31
+121,Loans to Depository Institutions, 0.24,0.19,0.20,0.18,0.21
+122,Commercial and Industrial Loans, 20.49, 20.03, 19.92, 18.82, 18.75
+123,Loans to Individuals, 8.07,8.58,8.39,8.68,9.50
+124,Credit Card Loans,1.17,1.20,1.26,1.18,1.33
+125,Agricultural Loans, 0.29,0.33,0.31,0.33,0.32
+126,Loans to Foreign Govts and Inst,0.00,0.00,0.00,0.01,0.01
+127,Other Loans and Leases, 5.60,5.32,5.47,6.21,7.24
+128,PERCENT OF TOTAL ASSETS,09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005
+129,Short-Term Investments, 5.95,6.81,6.88,8.04,5.73
+130,Liquid Assets, 18.93, 20.11, 19.58, 22.35, 23.89
+131,Investment Securities, 16.26, 17.30, 16.99, 18.55, 20.03
+132,Net Loans and Leases,64.90, 63.33, 63.88, 62.66, 60.09
+133,"Net Lns, Ls & Stdby Ltrs of Credit",67.94, 66.53, 66.91, 65.82, 63.42
+134,Core Deposits, 45.61, 47.01, 46.67, 48.23, 49.27
+135,Noncore Funding, 38.83, 36.78, 37.67, 36.10, 34.96
+136,Time Deposits of $100K or More, 9.99, 10.44, 10.08, 11.73,9.25
+137,Foreign Deposits, 2.61,3.08,3.12,2.70,2.55
+138,Fed Funds Purchased and Repos,6.46,7.27,7.30,7.72,8.72
+139,Net Fed Funds Purchased (Sold), 4.98,5.05,4.96,4.92,5.91
+140,Int-Bearing Liab Repr in 1 Year, 21.24, 22.23, 22.78, 22.38, 17.46
+141,Long-Term Debt Repr in 1 Year,2.26,2.35,2.17,2.14,2.13
+142,Net ST Noncore Funding Dependence, 27.48, 25.49, 26.24, 23.42, 23.55
+143,Short-Term Inv/ST Noncore Funding, 20.72, 24.25, 24.89, 26.53, 23.69
+144,Liq Asts-ST Noncore Fndg/Nonliq Asts,-9.43, -6.65, -8.26, -3.40,1.72
+145,Net Loans and Leases/Total Deposits,103.89,100.81,101.89, 97.38, 97.41
+146,Net Loans and Leases/Core Deposits, 156.92,148.94,151.74,156.68,146.04
+147,Held-To-Mat Sec Appr(Depr)/T1 Cap, -0.70, -0.32, -0.09, -0.59, -0.70
+148,Avail-For-Sale Sec Appr(Depr)/T1 Cap,-5.87, -2.00, -1.37, -1.93, -3.11
+149,Available-For-Sale Securities, 94.38, 93.69, 93.93, 92.47, 91.79
+150,U.S. Treasury Securities, 1.09,1.23,1.15,2.12,2.93
+151,U.S. Agency Securities (excl MBS), 10.24, 15.93, 14.07, 17.97, 15.52
+152,Municipal Securities, 6.89,6.73,6.71,5.90,4.29
+153,Mortgage-Backed Securities,64.29, 59.79, 60.61, 59.23, 60.53
+154,Asset-Backed Securities,3.42,2.35,2.79,1.59,1.64
+155,Other Debt Securities,4.22,4.90,5.41,3.89,4.62
+156,Debt Securities Over 5 Years,60.96, 57.96, 58.04, 56.17, 62.90
+157,Pledged Securities,68.22, 61.45, 63.70, 61.87, 59.46
+158,"Structured Notes, Fair Value", 0.24,0.22,0.32,0.20,0.27
+159,ANALYSIS RATIOS,09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005
+160,Provision for Ln&Ls Losses/Avg Assets,1.00,0.24,0.36,0.15,0.15
+161,Provision for Ln&Ls Losses/Avg Lns&Ls,1.50,0.38,0.56,0.25,0.26
+162,ALLL/Nonaccrual Assets, 122.15,241.80,193.95,330.96,349.72
+163,Net Losses/Avg Loans and Leases,0.88,0.30,0.38,0.23,0.28
+164,"Write-downs, Trans Lns HFS/Avg Lns&Ls",0.01,0.00,0.00,0.00,0.00
+165,Recoveries/Prior Year-End Losses,16.39, 23.31, 30.58, 31.81, 30.96
+166,Earnings Coverage of Net Losses (X),2.46, 22.53, 13.40, 33.33, 22.73NET LOAN AND LEASE LOSSES BY TYPE---------------------------------
+167,Real Estate Loans,0.81,0.13,0.18,0.08,0.06
+168,RE Loans Secured By 1-4 Family, 0.61,0.14,0.18,0.09,0.08
+169,Revolving,0.72,0.20,0.24,0.12,0.07
+170,Closed-End, 0.52,0.12,0.15,0.08,0.07
+171,Commercial Real Estate Loans, 0.82,0.09,0.14,0.04,0.03
+172,Construction and Land Dev,1.79,0.13,0.25,0.03,0.01
+173,Multifamily,0.21,0.03,0.07,0.02,0.02
+174,Nonfarm Nonresidential, 0.16,0.05,0.06,0.04,0.04
+175,Other Loans and Leases, 0.38,0.21,0.27,0.22,0.41
+176,PERCENT OF LOANS AND LEASES,09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005
+177,30-89 Days PD Loans and Leases, 1.27,0.95,1.03,0.81,0.69
+178,90+ Days PD Loans and Leases, 0.25,0.18,0.21,0.15,0.16
+179,Nonaccrual Restructured,0.05,0.01,0.01,0.00,0.00PERCENT OF LNS&LS + OTHER ASSETS30+ DAYS PAST DUE AND NONACCRUAL
+180,30-89 Days Past Due Assets, 1.28,0.95,1.03,0.81,0.69
+181,90+ Days Past Due Assets, 0.26,0.18,0.21,0.15,0.16
+182,Nonaccrual Assets,1.75,0.71,0.94,0.50,0.43
+183,30+ Days PD & Nonaccrual Assets,3.38,1.93,2.29,1.50,1.31PERCENT OF TOTAL ASSETS-----------------------
+184,90+ Days PD and Nonaccrual Assets,1.39,0.58,0.77,0.42,0.36
+185,90+ PD & Nonaccrual Assets + OREO,1.60,0.68,0.90,0.48,0.42RESTRUCTURED & NONACCRUAL LNS&LS+ REAL ESTATE ACQUIRED AS PERCENT OF:
+186,Total Assets, 1.40,0.54,0.74,0.35,0.29
+187,Allowance for Loan & Lease Losses,125.27, 74.08, 91.20, 50.61, 42.13
+188,Equity Cap + ALLL, 15.98,6.01,7.98,3.91,3.34
+189,Tier 1 Cap + ALLL, 16.72,6.65,9.21,4.32,3.85
+190,Loans & Leases + RE Acquired, 2.11,0.88,1.17,0.58,0.49
+191, - 90+ Days Past Due, 0.26,0.17,0.20,0.14,0.13
+192, - Nonaccrual,2.40,0.89,1.23,0.56,0.43
+193, - 90+ Days Past Due, 0.08,0.07,0.08,0.05,0.07
+194, - Nonaccrual,0.86,0.47,0.50,0.52,0.61
+195, - 90+ Days Past Due, 0.33,0.30,0.29,0.31,0.29
+196, - Nonaccrual,0.33,0.20,0.24,0.14,0.16
+197,Dep Inst Lns - 30-89 Days PD, 0.00,0.00,0.02,0.00,0.00
+198, - 90+ Days Past Due, 0.00,0.00,0.01,0.00,0.00
+199, - Nonaccrual,0.00,0.00,0.00,0.00,0.03
+200,Agricultural - 30-89 Days PD, 0.42,0.25,0.28,0.27,0.28
+201, - 90+ Days Past Due, 0.04,0.03,0.02,0.02,0.01
+202, - Nonaccrual,0.55,0.67,0.43,0.36,0.35
+203,Foreign Govts- 30-89 Days PD, 0.00,0.03,0.29,1.35,0.35
+204, - 90+ Days Past Due, 0.00,0.00,0.00,0.00,0.00
+205, - Nonaccrual,0.01,0.00,0.00,0.00,0.00
+206,Other Lns&Ls - 30-89 Days PD, 0.56,0.52,0.59,0.49,0.43
+207, - 90+ Days Past Due, 0.04,0.02,0.03,0.02,0.02
+208,- 90+ Days Past Due,0.34,0.24,0.28,0.20,0.20
+209,- Nonaccrual, 1.46,0.73,0.87,0.50,0.42
+210,- 90+ Days Past Due,0.12,0.08,0.10,0.08,0.05
+211,- Nonaccrual, 0.87,0.43,0.47,0.26,0.14
+212,- 90+ Days Past Due,0.41,0.28,0.33,0.24,0.27
+213,- Nonaccrual, 1.77,0.82,1.00,0.58,0.50
+214,Commercial RE - 30-89 Days PD,1.34,0.81,1.03,0.63,0.54
+215,- 90+ Days Past Due,0.16,0.09,0.10,0.05,0.04
+216,- Nonaccrual, 2.84,0.88,1.34,0.54,0.42
+217,Const & Dev - 30-89 Days PD,2.39,1.20,1.74,0.87,0.63
+218,- 90+ Days Past Due,0.28,0.14,0.15,0.05,0.05
+219,- Nonaccrual, 6.29,1.45,2.39,0.50,0.24
+220,Multifamily - 30-89 Days PD,0.85,0.61,0.77,0.43,0.50
+221,- 90+ Days Past Due,0.10,0.03,0.04,0.04,0.03
+222,- Nonaccrual, 1.35,0.55,0.66,0.38,0.31
+223,Nonfarm Nres- 30-89 Days PD,0.73,0.54,0.60,0.47,0.45
+224,- 90+ Days Past Due,0.08,0.05,0.05,0.03,0.03
+225,- Nonaccrual, 1.03,0.54,0.61,0.51,0.53
+226,- 90+ Days Past Due,0.05,0.07,0.01,0.05,0.02
+227,- Nonaccrual, 1.16,0.59,0.56,0.58,0.89
+228,- 90+ Days Past Due,0.97,0.79,0.84,0.98,0.82
+229,- Nonaccrual, 0.25,0.15,0.17,0.13,0.08
+230,CAPITAL RATIOS, 09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005
+231,Tier 1 Leverage Ratio,7.50,7.63,7.42,7.79,7.44
+232,Tier 1 RBC Ratio, 9.03,9.36,8.95,9.59,9.57
+233,DERIVATIVES AND, , , , , 
+234,OFF-BALANCE-SHEET TRANSACTIONS, , , , , 
+235,PERCENT OF TOTAL ASSETS:, , , , , 
+236,Loan Commitments,27.93, 31.43, 30.37, 31.81, 30.69
+237,Standby Letters of Credit,3.03,3.14,3.00,3.13,3.22
+238,Credit Derivatives (BHC as Beneficiary),1.75,2.24,2.19,1.49,1.34
+239,TYPE OF DERIVATIVE INSTRUMENT:, , , , , 
+240,Derivative Contracts,68.28, 71.78, 67.33, 76.05, 74.40
+241,Interest Rate Contracts, 51.87, 50.23, 47.29, 59.24, 55.47
+242,Interest Rate Futures & Forward Contr,9.62,7.84,7.46,8.76,8.98
+243,Written Options Contr (Int Rate), 3.82,5.14,3.80,7.12,5.92
+244,Purchased Options Contr (Int Rate), 4.12,5.79,4.45,7.15,5.54
+245,Written Options Contr (Foreign Exch), 0.45,0.66,0.66,0.54,0.73
+246,Purchased Options Contr (Foreign Exch), 0.42,0.68,0.66,0.58,0.78
+247,Written Options Contr (Comm & Other), 0.75,0.60,0.54,0.60,0.47
+248,Purchased Options Contr (Comm & Oth), 0.82,0.71,0.76,0.78,0.60
+249,PERCENT OF NOTIONAL AMOUNT, 09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005
+250,Interest Rate Contracts, 84.80, 87.57, 85.40, 87.06, 89.88
+251,Foreign Exchange Contracts, 9.76,7.69,9.53,8.39,7.66
+252,Exchange-Traded,0.53,0.55,0.36,0.41,0.16
+253,Over-The-Counter, 5.13,6.63,5.02,5.74,7.10
+254,Purchased Options,5.81,7.23,5.83,6.76,6.32
+255,Exchange-Traded,0.57,0.55,0.27,0.39,0.21
+256,Over-The-Counter, 4.90,6.08,5.13,5.82,5.51
+257,Foreign Exchange Contracts, 5.26,3.90,5.60,4.27,5.61
+258,Foreign Exchange Contracts, 1.13,0.64,0.81,0.65,0.37
+259,Over 1 Year to 5 Years,29.59, 28.72, 27.98, 33.22, 27.91
+260,Over 5 Years,16.09, 18.69, 19.42, 19.26, 20.78
+261,Gross Negative Fair Value (Abs Val),1.28,0.86,1.19,0.78,0.96
+262,Gross Positive Fair Value (X),0.17,0.13,0.15,0.09,0.11
+263,Held for Trading (X), 0.14,0.10,0.12,0.07,0.09
+264,Non-Traded (X), 0.02,0.01,0.02,0.01,0.01
+265,Current Credit Exposure (X),0.10,0.07,0.09,0.05,0.06
+266,Credit Losses on Derivative Contracts,0.00,0.00,0.00,0.00,0.00PAST DUE DERIVATIVE INSTRUMENTSFAIR VALUE:
+267,30-89 Days Past Due,0.00,0.00,0.00,0.00,0.00
+268,90+ Days Past Due,0.00,0.00,0.00,0.00,0.00
+269,OTHER RATIOS:, , , , , 
+270,Current Credit Exposure/Risk Wtd Asts,1.07,0.69,0.84,0.47,0.57
+271,INSURANCE ACTIVITIES, 09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005
+272,ANALYSIS RATIOS:, , , , , 
+273,Ins Underwriting Assets/Consol Assets,0.05, N/A, N/A, N/A, N/A
+274,Ins Under Assets(P/C)/Tot Ins Und Ast, 41.91, 41.02, 41.42, 44.70, 39.72
+275,Ins Under Assets(L/H)/Tot Ins Und Ast, 58.09, 58.98, 58.58, 55.30, 60.28
+276,Credit Rel Prem Inc/Tot Prem Inc,76.74, 74.90, 73.60, 75.39, 73.61
+277,Ins Net Inc (L/H)/Equity (L/H), 5.14,4.91,7.25,6.78, 12.57
+278,Net Assets Broker-Dealer Subs/Cons Asts,0.68,0.67,0.64,0.98,1.22
+279,FOREIGN ACTIVITIES, , , , , 
+280,Yield: Foreign Loans, 2.92,2.77,3.00,2.66,2.35
+281,Commercial and Industrial Loans,0.68,4.09,2.70,0.22, 10.52
+282,Foreign Governments and Inst,-0.09, -0.34, -0.24, -0.13,0.00
+283,GROWTH RATES:, , , , , 
+284,Net Loans and Leases,45.60, 28.24,126.76,148.72, 16.59
+285,Total Selected Assets, 10.63, 36.45,126.31, 67.29, 16.60
+286,Deposits,-1.23, 42.94, 41.77, 33.71, 18.44
+287,PROFITABLITY:,09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005
+288,Net Income/Avg Equity Capital,2.29, 10.76,8.75, 13.95, 14.35
+289,Bank Net Inc/Avg Eq Inv in Banks, 5.32, 11.84,9.71, 14.64, 14.14
+290,Nonbk Net Inc/Avg Eq Inv in Nonbanks, 0.36,7.60,6.73,9.27,8.80
+291,Sub BHCs Net Inc/Avg Eq Inv in Sub BHCs,2.99,8.06,6.54,8.92, 10.94
+292,Bank Net Income/Parent Net Income, 89.87, 78.36, 78.21, 76.65, 71.56
+293,Nonbank Net Income/Parent Net Income, 5.43,7.02,5.89,4.94,5.57
+294,Total Debt/Equity Capital, 18.58, 16.55, 16.48, 15.66, 15.82
+295,Tot Debt+NP to Subs Iss Tr Pref/Equity,29.36, 25.47, 26.01, 25.31, 24.23
+296,Tot Debt+Lns Guaranteed for Affl/Equity, 21.54, 18.72, 18.53, 17.33, 20.12
+297,Total Debt/Eq Cap - Exc Over Fair Value, 19.16, 16.79, 16.69, 15.89, 16.27
+298,Long-Term Debt/Equity Capital, 12.98, 11.89, 11.89, 11.77, 12.45
+299,Short-Term Debt/Equity Capital, 4.46,3.27,3.73,3.12,2.55
+300,Current Portion of LT Debt/Equity,0.19,0.06,0.05,0.28,0.12
+301,Exc Cost Over Fair Value/Equity Cap,0.41,0.36,0.29,0.40,1.06
+302,Total Investment in Subs/Equity,124.03,121.20,122.25,121.05,119.83
+303,"Eq Inv Sub/Eq Cap,QualTPS+Oth PS in T1", 100.76,100.58,100.18, 99.43, 99.24
+304,Cash Fl Fr Op+Noncash+Op Ex/Op Ex+Div, 98.70,153.20,138.88,134.43,147.51
+305,Adj Cash Fl/Op Exp+Repaid LT Debt+Div,130.04,101.78, 96.06,114.51, 98.70
+306,Pretax Oper Inc + Int Exp/Int Expense, 1132.88, 4668.11, 5442.83, 3185.46, 3665.49
+307,Div + Int From Subs/Int Exp + Div, 99.29,183.98,165.84,157.02,176.22
+308,Fees+Other Inc From Subs/Sal + Oth Exp,15.50, 14.93, 15.70, 15.33, 19.65
+309,PAST DUE AND NONACCRUAL AS % OF LNS&LS:, , , , , 
+310,90+ Days Past Due,0.00,0.00,0.00,0.00,0.00
+311,Nonaccrual, 2.60,6.17,0.66, 11.33,0.62
+312,Total,2.60,6.17,0.66, 11.33, 11.11
+313,GUARANTEED LOANS AS % OF EQUITY CAP:, , , , , 
+314,To Bank Subsidiaries, 0.00,0.00,0.00,0.00,0.00
+315,To Nonbank Subsidiaries,1.06,0.47,0.48,0.25,1.22
+316,To Subsidiary BHCs, 0.00,0.00,0.00,0.01,0.01
+317,Total,1.56,0.59,0.60,0.36,1.76
+318,AS A % OF CONSOLIDATED BHC ASSETS:, , , , , 
+319,Nonbank Assets of Nonbank Subsidiaries, 5.02,5.37,5.39,5.81,6.98
+320,Combined Thrift Assets, 0.29,0.23,0.23,0.39,0.35
+321,Combined Foreign Nonbank Sub Assets,0.13,0.11,0.11,0.11,0.14
+322,PAYOUT RATIOS - PARENT, 09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005
+323,Div Paid/Inc Before Undist Inc, 140.47, 67.88, 71.25, 68.73, 68.89
+324,Dividends Paid/Net Income, 77.41, 43.77, 50.51, 36.79, 39.47
+325,Dividends From Nonbank Subs,4.51,7.01,8.12,6.21, 11.16
+326,Dividends From Subsidiary BHCs,15.41, 21.15, 16.03, 17.75, 21.35
+327,Dividends From Bank Subs,75.69, 74.52, 86.39, 66.52, 59.78
+328,Interest Income From Bank Subs, 3.61,3.72,4.07,3.07,2.56
+329,Mgt & Service Fees From Bank Subs,6.38,3.95,4.86,3.62,3.56
+330,Other Income From Bank Subs,0.09,0.00,0.04,0.01,0.27
+331,Interest Income From Nonbank Subs, 22.25, 25.32, 60.61, 30.14, 24.40
+332,Mgt & Serv Fees From Nonbank Subs,1.48,2.09,2.56,3.76,2.75
+333,Other Income From Nonbank Subs, 0.01,0.02,0.03,0.02,0.01
+334,Operating Inc From Nonbank Subs, 99.85, 97.63,188.18,109.39,101.72
+335,PERCENT OF SUB BHCs' NET INCOME:, , , , , 
+336,Dividends From Subsidiary BHCs, 138.78, 46.47, 38.68, 46.80, 48.92
+337,Interest Inc From Subsidiary BHCs, 39.74,5.45,8.74,4.08,4.48
+338,Mgt & Serv Fees From Sub BHCs,3.14,2.03,1.78,0.44,3.17
+339,Other Income From Subsidiary BHCs,0.00,0.00,0.00,0.00,0.00
+340,Dividends From Bank Subsidiaries,47.31, 53.16, 57.87, 57.66, 55.37
+341,Interest Income From Bank Subs, 6.71,3.14,2.70,2.76,2.40
+342,Mgt & Serv Fees From Bank Subs, 4.53,2.70,2.72,3.23,2.62
+343,Other Income From Bank Subs,0.02,0.00,0.01,0.00,0.02
+344,Mgt & Serv Fees From Nonbank Subs,0.11,0.10,0.07,0.09,0.12
+345,Other Income From Nonbank Subs, 0.00,0.00,0.00,0.00,0.00
+346,Mgt & Serv Fees From Sub BHCs,0.08,0.00,0.00,0.01,0.06
+347,Other Income From Subsidiary BHCs,0.00,0.00,0.00,0.00,0.00
+348, PERCENT OF AVERAGE ASSETS:, , , , , 
+349," LOAN MIX, % OF GROSS LOANS & LEASES:", , , , , 
+350, PERCENT OF TOTAL ASSETS:, , , , , 
+351, ANALYSIS RATIOS:, , , , , 
+352, PAST DUE AND NONACCRUAL AS % OF LNS&LS:, , , , , 
+353, GUARANTEED LOANS AS % OF EQUITY CAP:, , , , , 
+354, AS A % OF CONSOLIDATED BHC ASSETS:, , , , , 
+355, PERCENT OF SUB BHCs' NET INCOME:, , , , , 
+356, 1027004,"54,042,757", ZIONS BANCORPORATION,"SALT LAKE CITY, UT", Note: Peer Group 1 has, 66 bank holding companies. 
+357, 09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005, 
+358, 09/30/2008,09/30/2007,12/31/2007,12/31/2006,12/31/2005, 
+359, 1199563,"22,488,541", ASSOCIATED BANC-CORP,"GREEN BAY, WI", , 
+360, 1097614,"13,303,986"," BANCORPSOUTH, INC.","TUPELO, MS", , 
+361, 1025608,"76,458,299", BANCWEST CORPORATION,"HONOLULU, HI", , 
+362, 1025309,"10,335,046", BANK OF HAWAII CORPORATION,"HONOLULU, HI", , 
+363, 3587146," 267,636,000", BANK OF NEW YORK MELLON CORPOR,"NEW YORK, NY", , 
+364, 1074156," 137,040,900", BB&T CORPORATION,"WINSTON-SALEM, NC", , 
+365, 1078529,"61,537,782"," BBVA USA BANCSHARES, INC."," THE WOODLANDS, TX", , 
+366, 1883693,"22,477,815", BOK FINANCIAL CORPORATION," TULSA, OK", , 
+367, 2277860," 154,803,113", CAPITAL ONE FINANCIAL CORPORAT,"MCLEAN, VA", , 
+368, 1843080,"11,050,293", CATHAY GENERAL BANCORP,"LOS ANGELES, CA", , 
+369, 1132449," 163,772,212"," CITIZENS FINANCIAL GROUP, INC.","PROVIDENCE, RI", , 
+370, 1205688,"13,129,814"," CITIZENS REPUBLIC BANCORP, INC","FLINT, MI", , 
+371, 1027518,"16,335,088", CITY NATIONAL CORPORATION," BEVERLY HILLS, CA", , 
+372, 1080465,"26,262,575"," COLONIAL BANCGROUP, INC., THE"," MONTGOMERY, AL", , 
+373, 1199844,"65,710,366", COMERICA INCORPORATED," DALLAS, TX", , 
+374, 1049341,"16,961,900"," COMMERCE BANCSHARES, INC."," KANSAS CITY, MO", , 
+375, 1102367,"14,145,451"," CULLEN/FROST BANKERS, INC.","SAN ANTONIO, TX", , 
+376, 2734233,"11,722,296"," EAST WEST BANCORP, INC."," PASADENA, CA", , 
+377, 1130780,"17,479,243", FBOP CORPORATION,"OAK PARK, IL", , 
+378, 1070345," 116,294,077", FIFTH THIRD BANCORP," CINCINNATI, OH", , 
+379, 2744894,"19,304,440", FIRST BANCORP," SAN JUAN, PR", , 
+380, 1118797,"10,815,464"," FIRST BANKS, INC."," SAINT LOUIS, MO", , 
+381, 1075612,"16,665,605"," FIRST CITIZENS BANCSHARES, INC","RALEIGH, NC", , 
+382, 1094640,"32,805,263", FIRST HORIZON NATIONAL CORPORA,"MEMPHIS, TN", , 
+383, 1020902,"16,831,417"," FIRST NATIONAL OF NEBRASKA, IN","OMAHA, NE", , 
+384, 1070804,"10,687,065", FIRSTMERIT CORPORATION,"AKRON, OH", , 
+385, 1117129,"16,136,145", FULTON FINANCIAL CORPORATION,"LANCASTER, PA", , 
+386, 1245415,"69,275,826", HARRIS FINANCIAL CORP.,"WILMINGTON, DE", , 
+387, 3232316," 467,739,691", HSBC NORTH AMERICA HOLDINGS IN,"METTAWA, IL", , 
+388, 1068191,"54,669,893", HUNTINGTON BANCSHARES INCORPOR,"COLUMBUS, OH", , 
+389, 1104231,"11,544,396", INTERNATIONAL BANCSHARES CORPO,"LAREDO, TX", , 
+390, 1068025," 101,494,797", KEYCORP," CLEVELAND, OH", , 
+391, 1037003,"65,247,215", M&T BANK CORPORATION,"BUFFALO, NY", , 
+392, 3594612,"63,517,959", MARSHALL & ILSLEY CORPORATION," MILWAUKEE, WI", , 
+393, 1069125," 143,695,954", NATIONAL CITY CORPORATION," CLEVELAND, OH", , 
+394, 2132932,"32,161,610"," NEW YORK COMMUNITY BANCORP, IN","WESTBURY, NY", , 
+395, 3212091,"13,692,504", NEW YORK PRIVATE BANK & TRUST," NEW YORK, NY", , 
+396, 1199611,"79,243,977", NORTHERN TRUST CORPORATION,"CHICAGO, IL", , 
+397, 1069778," 145,644,536"," PNC FINANCIAL SERVICES GROUP,"," PITTSBURGH, PA", , 
+398, 1129382,"40,390,000"," POPULAR, INC."," SAN JUAN, PR", , 
+399, 1826056,"32,059,020", RBC BANCORPORATION (USA),"RALEIGH, NC", , 
+400, 3242838," 144,294,958", REGIONS FINANCIAL CORPORATION," BIRMINGHAM, AL", , 
+401, 1141599,"13,696,595"," SOUTH FINANCIAL GROUP, INC."," GREENVILLE, SC", , 
+402, 1111435," 286,712,268", STATE STREET CORPORATION,"BOSTON, MA", , 
+403, 3152245,"12,608,511", STERLING FINANCIAL CORPORATION,"SPOKANE, WA", , 
+404, 1131787," 174,776,760"," SUNTRUST BANKS, INC.","ATLANTA, GA", , 
+405, 1117156,"13,636,287"," SUSQUEHANNA BANCSHARES, INC.","LITITZ, PA", , 
+406, 1078846,"34,339,141", SYNOVUS FINANCIAL CORP.," COLUMBUS, GA", , 
+407, 2816906," 613,058,000", TAUNUS CORPORATION,"NEW YORK, NY", , 
+408, 2389941,"16,541,975", TCF FINANCIAL CORPORATION," WAYZATA, MN", , 
+409, 1249196," 117,631,391", TD BANKNORTH INC.," PORTLAND, ME", , 
+410, 1119794," 247,055,000", U.S. BANCORP,"MINNEAPOLIS, MN", , 
+411, 2694814,"13,044,255"," UCBH HOLDINGS, INC."," SAN FRANCISCO, CA", , 
+412, 1378434,"62,599,753", UNIONBANCAL CORPORATION," SAN FRANCISCO, CA", , 
+413, 2307280,"46,162,543"," UTRECHT-AMERICA HOLDINGS, INC.","NEW YORK, NY", , 
+414, 1048773,"14,288,151", VALLEY NATIONAL BANCORP," WAYNE, NJ", , 
+415, 2801546,"16,849,335"," W HOLDING COMPANY, INC."," MAYAGUEZ, PR", , 
+416, 1073551," 760,558,000", WACHOVIA CORPORATION,"CHARLOTTE, NC", , 
+417, 1145476,"17,523,422", WEBSTER FINANCIAL CORPORATION," WATERBURY, CT", , 
+418, 1120754," 622,361,000", WELLS FARGO & COMPANY," SAN FRANCISCO, CA", , 
+419, 1079740,"10,992,070", WHITNEY HOLDING CORPORATION," NEW ORLEANS, LA", , 
+420, 1888193,"12,386,648", WILMINGTON TRUST CORPORATION,"WILMINGTON, DE", , 
